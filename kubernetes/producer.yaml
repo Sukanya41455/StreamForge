@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: producer
+  namespace: streamforge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: producer
+  template:
+    metadata:
+      labels:
+        app: producer
+    spec:
+      containers:
+        - name: producer
+          image: streamforge-api:latest
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-m", "producer.service"]
+          envFrom:
+            - configMapRef: {name: streamforge-config}
+          env:
+            - {name: EVENTS_PER_SECOND, value: "5"}
+          resources:
+            requests: {cpu: 100m, memory: 256Mi}
+            limits: {cpu: 500m, memory: 512Mi}

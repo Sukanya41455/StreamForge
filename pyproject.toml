@@ -1,0 +1,22 @@
+[project]
+name = "streamforge"
+version = "0.1.0"
+description = "Local real-time marketplace analytics platform"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.142,<1",
+    "kafka-python>=3,<4",
+    "prometheus-client>=0.26,<1",
+    "psycopg[binary]>=3.3,<4",
+    "pyspark==3.5.3",
+    "uvicorn[standard]>=0.54,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.1,<10"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools]
+packages = ["api", "producer", "streaming"]

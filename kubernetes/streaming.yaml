@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: streaming
+  namespace: streamforge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: streaming
+  template:
+    metadata:
+      labels:
+        app: streaming
+    spec:
+      containers:
+        - name: streaming
+          image: streamforge-api:latest
+          imagePullPolicy: IfNotPresent
+          command: ["python", "-m", "streaming.main"]
+          envFrom:
+            - configMapRef: {name: streamforge-config}
+          volumeMounts:
+            - name: checkpoints
+              mountPath: /checkpoints
+          resources:
+            requests: {cpu: 500m, memory: 1Gi}
+            limits: {cpu: 1500m, memory: 2Gi}
+      volumes:
+        - name: checkpoints
+          emptyDir: {}

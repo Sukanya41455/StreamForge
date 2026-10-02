@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: streamforge-config
+  namespace: streamforge
+data:
+  KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+  DATABASE_URL: postgresql://streamforge:streamforge@postgres:5432/streamforge
+  CHECKPOINT_DIR: /checkpoints
