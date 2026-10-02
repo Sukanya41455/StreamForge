@@ -1,7 +1,5 @@
 # StreamForge
 
-![](streamforge.png?raw=true)
-
 **A production-minded real-time analytics platform for marketplace events.**
 
 StreamForge turns a stream of versioned order and payment events into
